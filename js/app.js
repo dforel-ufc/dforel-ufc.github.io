@@ -12,7 +12,11 @@ document.addEventListener("DOMContentLoaded", function(_e) {
     
     /** Service worker initialization **/
     if('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('js/sw.js');
+        navigator.serviceWorker.register('js/sw.js').then( reg => {
+            console.log('[ServiceWorker] Registration successful');
+        }, err => {
+            console.log('[ServiceWorker] Registration failed');
+        });
     }
     
     /** Touch Events related to the bcStart block **/
