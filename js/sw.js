@@ -31,18 +31,6 @@ self.addEventListener('install', (e) => {
   );
 });
 
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then((keyList) => {
-          return Promise.all(keyList.map((key) => {
-        if(appShellFiles.indexOf(key) === -1) {
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
-});
-
 self.addEventListener('fetch', (e) => {
   e.respondWith(
     caches.match(e.request).then((r) => {
