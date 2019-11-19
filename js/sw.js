@@ -25,8 +25,10 @@ var appShellFiles = [
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
+    console.log('[Service Worker] Install');
     caches.open(nameOfCache).then((cache) => {
-      return cache.addAll(appShellFiles);
+        console.log('[Service Worker] Caching all: app shell and content');
+        return cache.addAll(appShellFiles);
     })
   );
 });
