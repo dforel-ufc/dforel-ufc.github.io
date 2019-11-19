@@ -24,16 +24,18 @@ var appShellFiles = [
 ];
 
 self.addEventListener('install', (e) => {
-    e.waitUntil( caches.open(cacheName).then((cache) => {
-        return cache.addAll(appShellFiles);
-    }));
+  e.waitUntil(
+    caches.open(cacheName).then((cache) => {
+      return cache.addAll(appShellFiles);
+    })
+  );
 });
 
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keyList) => {
           return Promise.all(keyList.map((key) => {
-        if(cacheName.indexOf(key) === -1) {
+        if(appShellFiles.indexOf(key) === -1) {
           return caches.delete(key);
         }
       }));
